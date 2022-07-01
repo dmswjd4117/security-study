@@ -1,8 +1,10 @@
 package com.example.demo.config;
 
 
+import com.example.demo.security.auth.FormAuthenticationProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -15,16 +17,19 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-
     private final UserDetailsService userDetailsService;
 
     public SecurityConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationProvider authenticationProvider(){
+        return new FormAuthenticationProvider(passwordEncoder(), userDetailsService);
     }
 
     @Bean
@@ -34,7 +39,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity, AuthenticationProvider authenticationProvider) throws Exception {
         httpSecurity
                 .authorizeRequests((auth)->{
                     auth
@@ -44,7 +49,7 @@ public class SecurityConfig {
                             .antMatchers("/config").hasAnyRole("ADMIN")
                             .anyRequest().authenticated();
                 })
-                .userDetailsService(userDetailsService)
+                .authenticationProvider(authenticationProvider)
                 .formLogin()
                 .successHandler((req, res, auth)->{
                     System.out.println(auth.getPrincipal());

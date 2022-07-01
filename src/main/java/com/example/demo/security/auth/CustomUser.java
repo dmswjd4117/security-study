@@ -1,4 +1,4 @@
-package com.example.demo.security.service;
+package com.example.demo.security.auth;
 
  import com.example.demo.domain.user.Member;
  import org.springframework.security.core.GrantedAuthority;
@@ -12,5 +12,9 @@ public class CustomUser extends User {
     public CustomUser(Member member, Collection<? extends GrantedAuthority> auths){
         super(member.getUserName(), member.getPassword(), auths);
         this.member = member;
+    }
+
+    public Member getMember() {
+        return member;
     }
 }

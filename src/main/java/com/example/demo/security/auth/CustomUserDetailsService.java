@@ -1,4 +1,4 @@
-package com.example.demo.security.service;
+package com.example.demo.security.auth;
 
 import com.example.demo.domain.user.Member;
 import com.example.demo.repository.MemberRepository;

@@ -1,7 +1,8 @@
-package com.example.demo.security.auth;
+package com.example.demo.security.auth.service;
 
 import com.example.demo.domain.user.Member;
 import com.example.demo.repository.MemberRepository;
+import com.example.demo.security.auth.CustomUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +23,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println(username);
         Member member = memberRepository.findByUserName(username);
         if(member == null){
             throw new UsernameNotFoundException(username);

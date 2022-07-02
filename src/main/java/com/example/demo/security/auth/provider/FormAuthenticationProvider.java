@@ -1,4 +1,4 @@
-package com.example.demo.security.auth;
+package com.example.demo.security.auth.provider;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -12,33 +12,40 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class FormAuthenticationProvider implements AuthenticationProvider {
 
-    private final PasswordEncoder passwordEncoder;
     private final UserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
 
-    public FormAuthenticationProvider(PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {
-        this.passwordEncoder = passwordEncoder;
+    public FormAuthenticationProvider(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
         this.userDetailsService = userDetailsService;
+        this.passwordEncoder = passwordEncoder;
     }
-
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String id = authentication.getName();
         String password = (String)authentication.getCredentials();
 
+        UserDetails userDetails = userDetailsService.loadUserByUsername(id);
 
-        try{
-            UserDetails userDetails = userDetailsService.loadUserByUsername(id);
-
-            if(userDetails == null || !passwordEncoder.matches(password, userDetails.getPassword())){
-                throw new BadCredentialsException("invalid user");
-            }
-
-            User user = (User) userDetails;
-            return new UsernamePasswordAuthenticationToken(user,null, user.getAuthorities());
-        }catch (Exception exception){
-            throw new RuntimeException(exception.getMessage());
+        if(userDetails == null || !passwordEncoder.matches(password, userDetails.getPassword())){
+            throw new BadCredentialsException("invalid user");
         }
+
+        User user = (User) userDetails;
+        return new UsernamePasswordAuthenticationToken(user,null, user.getAuthorities());
+
+//        try{
+//            UserDetails userDetails = userDetailsService.loadUserByUsername(id);
+//
+//            if(userDetails == null || !passwordEncoder.matches(password, userDetails.getPassword())){
+//                throw new BadCredentialsException("invalid user");
+//            }
+//
+//            User user = (User) userDetails;
+//            return new UsernamePasswordAuthenticationToken(user,null, user.getAuthorities());
+//        }catch (Exception exception){
+//            throw new RuntimeException(exception.getMessage());
+//        }
     }
 
     @Override

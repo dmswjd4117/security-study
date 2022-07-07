@@ -1,19 +1,19 @@
-package com.example.demo.domain.user;
+package com.example.demo.domain;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "members")
 @Setter @Getter @ToString
 public class Member {
 
-    @Column(name = "user_id")
+    @Column(name = "member_id")
     @Id @GeneratedValue
     private Long id;
 
@@ -23,6 +23,6 @@ public class Member {
 
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    private Set<Role> userRoles = new HashSet<>();
+    @OneToMany(mappedBy = "member")
+    private List<MemberRole> memberRoles = new ArrayList<>();
 }

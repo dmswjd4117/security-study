@@ -1,7 +1,7 @@
 package com.example.demo.controller.user;
 
 
-import com.example.demo.domain.user.Member;
+import com.example.demo.domain.Member;
 import com.example.demo.service.MemberService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;

@@ -12,11 +12,10 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/dmswjd
     username: dmswjd
-    password:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
       show-sql: true
     properties:
       hibernate:

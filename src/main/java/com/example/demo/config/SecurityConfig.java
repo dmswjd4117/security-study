@@ -57,8 +57,8 @@ public class SecurityConfig {
         httpSecurity
                 .authorizeRequests((auth)->{
                     auth
-                            .antMatchers("/me").hasAnyRole("USER", "ADMIN")
-                            .antMatchers("/manage") .hasAnyRole("MANAGER")
+                            .antMatchers("/mypage").hasAnyRole("USER")
+                            .antMatchers("/messages") .hasAnyRole("MANAGER")
                             .antMatchers("/config").hasAnyRole("ADMIN")
                             .anyRequest().permitAll();
                 })
@@ -73,29 +73,5 @@ public class SecurityConfig {
 
         return httpSecurity.build();
     }
-
-
-//    @Bean
-//    public InMemoryUserDetailsManager userDetailService(){
-//        UserDetails user = User.builder()
-//                .username("u")
-//                .password(passwordEncoder().encode("1111"))
-//                .roles("USER")
-//                .build();
-//
-//        UserDetails manager = User.builder()
-//                .username("m")
-//                .password(passwordEncoder().encode("1111"))
-//                .roles("MANAGER", "USER")
-//                .build();
-//
-//        UserDetails admin = User.builder()
-//                .username("a")
-//                .password(passwordEncoder().encode("1111"))
-//                .roles("ADMIN", "MANAGER", "USER")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(user, admin, manager);
-//    }
 
 }

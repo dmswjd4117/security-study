@@ -1,6 +1,6 @@
 package com.example.demo.security.auth.service;
 
-import com.example.demo.domain.user.Member;
+import com.example.demo.domain.Member;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.security.auth.CustomUser;
 import org.springframework.security.core.GrantedAuthority;

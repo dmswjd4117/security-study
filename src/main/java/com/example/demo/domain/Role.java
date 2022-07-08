@@ -1,15 +1,15 @@
 package com.example.demo.domain;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "roles")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
+@Getter @Setter
+@ToString
 public class Role {
 
     @Id
@@ -19,9 +19,13 @@ public class Role {
 
     private String roleName;
 
+    private String roleDescription;
+
     @OneToMany(mappedBy = "role")
+    @ToString.Exclude
     private List<MemberRole> memberRoles = new ArrayList<>();
 
     @OneToMany(mappedBy = "role")
+    @ToString.Exclude
     private List<ResourceRole> resourceRoles = new ArrayList<>();
 }

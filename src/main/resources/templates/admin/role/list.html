@@ -26,12 +26,12 @@
 					<td style="text-align: left;">
 						<a th:href="@{'/admin/roles/' + ${role.id}}"><span th:text="${role.roleName}">회원</span></a>
 					</td>
-					<td style="text-align: left;" th:text="${role.roleDesc}"></td>
+					<td style="text-align: left;" th:text="${role.getRoleDescription}"></td>
 				</tr>
 				</tbody>
 			</table>
 			<div style="text-align:right;">
-				<p><a class="btn btn-dark btn-lg" style="margin:10;" th:href="@{/admin/roles/register}">권한 등록</a></p>
+				<p><a class="btn btn-dark btn-lg" th:href="@{/admin/roles/register}">권한 등록</a></p>
 			</div>
 		</div>
 	</div>

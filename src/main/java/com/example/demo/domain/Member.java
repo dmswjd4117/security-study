@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "members")
 @Setter @Getter @ToString
 public class Member {
 
@@ -17,7 +16,7 @@ public class Member {
     @Id @GeneratedValue
     private Long id;
 
-    private String userName;
+    private String name;
 
     private String email;
 

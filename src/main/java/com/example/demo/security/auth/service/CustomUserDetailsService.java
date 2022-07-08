@@ -23,11 +23,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = memberRepository.findByUserName(username);
+        Member member = memberRepository.findByName(username);
         if(member == null){
             throw new UsernameNotFoundException(username);
         }
-        List<GrantedAuthority> roles = List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        List<GrantedAuthority> roles = List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
         return new CustomUser(member, roles);
     }
 }

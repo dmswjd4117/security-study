@@ -10,7 +10,7 @@ public class CustomUser extends User {
     private final Member member;
 
     public CustomUser(Member member, Collection<? extends GrantedAuthority> auths){
-        super(member.getUserName(), member.getPassword(), auths);
+        super(member.getName(), member.getPassword(), auths);
         this.member = member;
     }
 

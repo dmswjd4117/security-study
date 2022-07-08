@@ -59,7 +59,7 @@ public class SecurityConfig {
                     auth
                             .antMatchers("/mypage").hasAnyRole("USER")
                             .antMatchers("/messages") .hasAnyRole("MANAGER")
-                            .antMatchers("/config").hasAnyRole("ADMIN")
+                            .antMatchers("/admin/**").hasAnyRole("ADMIN")
                             .anyRequest().permitAll();
                 })
                 .authenticationProvider(authenticationProvider())

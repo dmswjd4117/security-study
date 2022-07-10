@@ -1,8 +1,8 @@
-package com.example.demo.security.auth.config;
+package com.example.demo.security.config;
 
-import com.example.demo.security.auth.handler.FormAuthenticationFailureHandler;
-import com.example.demo.security.auth.handler.FormAuthenticationSuccessHandler;
-import com.example.demo.security.auth.provider.FormAuthenticationProvider;
+import com.example.demo.security.handler.FormAuthenticationFailureHandler;
+import com.example.demo.security.handler.FormAuthenticationSuccessHandler;
+import com.example.demo.security.provider.FormAuthenticationProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDecisionManager;

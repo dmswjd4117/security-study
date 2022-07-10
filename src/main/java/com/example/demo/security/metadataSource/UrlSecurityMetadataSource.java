@@ -1,4 +1,4 @@
-package com.example.demo.security.auth.metadataSource;
+package com.example.demo.security.metadataSource;
 
 import com.example.demo.service.SecurityResourceService;
 import org.springframework.security.access.ConfigAttribute;

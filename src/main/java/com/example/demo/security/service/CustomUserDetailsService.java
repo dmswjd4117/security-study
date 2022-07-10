@@ -1,7 +1,7 @@
-package com.example.demo.security.auth.service;
+package com.example.demo.security.service;
 
 import com.example.demo.repository.MemberRepository;
-import com.example.demo.security.auth.CustomUser;
+import com.example.demo.security.CustomUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper;

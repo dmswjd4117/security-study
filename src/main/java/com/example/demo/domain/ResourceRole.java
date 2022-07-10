@@ -27,7 +27,7 @@ public class ResourceRole {
     public String toString(){
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("id", id)
-                .append("resource_name", resource.getResourceName())
+                .append("method", resource.getHttpMethod())
                 .append("role_name", role.getRoleName())
                 .toString();
     }

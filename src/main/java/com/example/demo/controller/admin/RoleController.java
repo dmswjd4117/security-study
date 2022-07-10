@@ -2,7 +2,7 @@ package com.example.demo.controller.admin;
 
 import com.example.demo.domain.Role;
 import com.example.demo.controller.dto.RoleDto;
-import com.example.demo.service.RoleService.RoleService;
+import com.example.demo.service.RoleService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +44,7 @@ public class RoleController {
     }
 
     @GetMapping(value="/admin/roles/{id}")
+//    @Transactional
     public String getRole(@PathVariable String id, Model model){
         roleService.getRole(Long.parseLong(id)).ifPresent((role)->{
             model.addAttribute("role", role);

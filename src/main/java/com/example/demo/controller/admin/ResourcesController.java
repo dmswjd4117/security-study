@@ -3,7 +3,7 @@ package com.example.demo.controller.admin;
 import com.example.demo.controller.dto.ResourceDto;
 import com.example.demo.domain.Resource;
 import com.example.demo.service.ResourcesService;
-import com.example.demo.service.RoleService.RoleService;
+import com.example.demo.service.RoleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

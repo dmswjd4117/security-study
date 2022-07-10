@@ -1,4 +1,4 @@
-package com.example.demo.service.RoleService;
+package com.example.demo.service;
 
 import com.example.demo.domain.Role;
 import com.example.demo.repository.ResourceRepository;
@@ -14,13 +14,9 @@ import java.util.stream.Collectors;
 public class RoleService {
 
     private final RoleRepository roleRepository;
-    private final ResourceRoleRepository resourceRoleRepository;
-    private final ResourceRepository resourceRepository;
 
-    public RoleService(RoleRepository roleRepository, ResourceRoleRepository resourceRoleRepository, ResourceRepository resourceRepository) {
+    public RoleService(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
-        this.resourceRoleRepository = resourceRoleRepository;
-        this.resourceRepository = resourceRepository;
     }
 
     public List<Role> getAllRoles() {

@@ -2,7 +2,10 @@ package com.example.demo.security.config;
 
 import com.example.demo.security.handler.FormAuthenticationFailureHandler;
 import com.example.demo.security.handler.FormAuthenticationSuccessHandler;
+import com.example.demo.security.metadataSource.UrlResourcesMapFactoryBean;
+import com.example.demo.security.metadataSource.UrlSecurityMetadataSource;
 import com.example.demo.security.provider.FormAuthenticationProvider;
+import com.example.demo.service.SecurityResourceService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDecisionManager;
@@ -67,10 +70,15 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-//    @Bean
-//    public FilterInvocationSecurityMetadataSource metadataSource(SecurityResourceService service){
-//        return new UrlSecurityMetadataSource(service);
-//    }
+
+    @Bean
+    public UrlResourcesMapFactoryBean urlResourcesMapFactoryBean(SecurityResourceService service){
+        return new UrlResourcesMapFactoryBean(service);
+    }
+    @Bean
+    public FilterInvocationSecurityMetadataSource metadataSource(UrlResourcesMapFactoryBean resourcesMapFactoryBean) throws Exception {
+        return new UrlSecurityMetadataSource(resourcesMapFactoryBean.getObject());
+    }
 
     @Bean
     public AccessDecisionManager accessDecisionManager(){
@@ -84,7 +92,6 @@ public class SecurityConfig {
             AuthenticationManager authenticationManager,
             FilterInvocationSecurityMetadataSource metadataSource,
             AccessDecisionManager accessDecisionManager){
-
         FilterSecurityInterceptor interceptor = new FilterSecurityInterceptor();
         interceptor.setSecurityMetadataSource(metadataSource);
         interceptor.setAccessDecisionManager(accessDecisionManager);

@@ -1,7 +1,6 @@
 package com.example.demo.security.service;
 
 import com.example.demo.repository.MemberRepository;
-import com.example.demo.security.CustomUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper;
@@ -17,7 +16,7 @@ import java.util.Collection;
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
-    private GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
+    private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
 
     public CustomUserDetailsService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;

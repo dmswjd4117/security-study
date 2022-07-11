@@ -34,10 +34,11 @@ import java.util.List;
 @Configuration
 public class SecurityConfig {
     private final UserDetailsService userDetailsService;
+    private final SecurityResourceService securityResourceService;
 
-
-    public SecurityConfig(UserDetailsService userDetailsService) {
+    public SecurityConfig(UserDetailsService userDetailsService, SecurityResourceService securityResourceService) {
         this.userDetailsService = userDetailsService;
+        this.securityResourceService = securityResourceService;
     }
 
     @Bean
@@ -72,12 +73,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UrlResourcesMapFactoryBean urlResourcesMapFactoryBean(SecurityResourceService service){
-        return new UrlResourcesMapFactoryBean(service);
+    public UrlResourcesMapFactoryBean urlResourcesMapFactoryBean(){
+        return new UrlResourcesMapFactoryBean(securityResourceService);
     }
     @Bean
     public FilterInvocationSecurityMetadataSource metadataSource(UrlResourcesMapFactoryBean resourcesMapFactoryBean) throws Exception {
-        return new UrlSecurityMetadataSource(resourcesMapFactoryBean.getObject());
+        return new UrlSecurityMetadataSource(resourcesMapFactoryBean.getObject(), securityResourceService);
     }
 
     @Bean

@@ -10,10 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("/admin/resource")
 public class ResourcesController {
 
     private final ResourcesService resourcesService;
@@ -27,25 +29,23 @@ public class ResourcesController {
     }
 
     //    리소스 삭제
-    @GetMapping(value="/admin/resources/delete/{id}")
+    @GetMapping(value="/delete/{id}")
     public String removeResource(@PathVariable String id, Model model){
-
-        Resource resources = resourcesService.getResource(Long.valueOf(id));
         resourcesService.deleteResource(Long.valueOf(id));
         urlSecurityMetadataSource.reload();
-        return "redirect:/admin/resources";
+        return "redirect:/admin/resource/list";
     }
 
     //    리소스 생성
-    @PostMapping(value="/admin/resource")
+    @PostMapping()
     public String createResource(ResourceDto resourceDto){
         resourcesService.createResource(ResourceDto.toEntity(resourceDto), resourceDto.getRoles().split(","));
         urlSecurityMetadataSource.reload();
-        return "redirect:/admin/resources";
+        return "redirect:/admin/resource/list";
     }
 
     //    리소스 생성 view
-    @GetMapping(value="/admin/resource")
+    @GetMapping()
     public String showResourceForm(Model model){
 
         ResourceDto resourceDto = new ResourceDto();
@@ -57,7 +57,7 @@ public class ResourcesController {
     }
 
     //    리소스 목록 view
-    @GetMapping(value="/admin/resources")
+    @GetMapping("/list")
     public String showResources(Model model){
 
         List<Resource> resources = resourcesService.getResources();
@@ -67,7 +67,7 @@ public class ResourcesController {
     }
 
     //    리소스 조회 view
-    @GetMapping(value="/admin/resources/{id}")
+    @GetMapping(value="/{id}")
     public String showResourceDetail(@PathVariable long id, Model model){
 
         Resource resource = resourcesService.getResource(id);

@@ -27,7 +27,7 @@
 				<tr class="link_btn hover" th:each="resource : ${resources}">
 
 					<td style="text-align: left;">
-						<a th:href="@{'/admin/resources/' + ${resource.id}}"><span th:text="${resource.resourceName}">회원</span></a>
+						<a th:href="@{'/admin/resource/' + ${resource.id}}"><span th:text="${resource.resourceName}">회원</span></a>
 					</td>
 					<td style="text-align: left;" th:text="${resource.resourceType}"></td>
 					<td style="text-align: left;" th:text="${resource.httpMethod}"></td>

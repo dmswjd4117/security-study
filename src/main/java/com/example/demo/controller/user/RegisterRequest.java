@@ -8,7 +8,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 public class RegisterRequest {
-    private String username;
+    private String name;
     private String email;
     private int age;
     private String password;

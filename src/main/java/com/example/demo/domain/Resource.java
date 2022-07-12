@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -21,15 +22,19 @@ public class Resource implements Serializable {
     @GeneratedValue
     private Long id;
 
+    @NotNull
     private String resourceName;
 
+    @NotNull
     private String httpMethod;
 
+    @NotNull
     private int orderNum;
 
+    @NotNull
     private String resourceType;
 
-    @OneToMany(mappedBy = "resource")
+    @OneToMany(mappedBy = "resource", cascade = CascadeType.REMOVE)
     private List<ResourceRole> resourceRoles = new ArrayList<>();
 
     @Override
